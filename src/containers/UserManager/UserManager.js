@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Aux from '../../hoc/Auxiliary';
 import SignIn from '../../components/SignIn/SignIn';
+import SignUp from '../../components/SignUp/SignUp';
 
 class UserManager extends Component {
   state = {
-    users: ""
+    users: "",
+    view: "SignIn",
   }
 
   
@@ -25,7 +27,9 @@ class UserManager extends Component {
   render () {
     return (
       <Aux>
-        <SignIn/>
+        <SignIn />
+        <SignUp />
+        <br />
         {this.state.users}
 
       </Aux>

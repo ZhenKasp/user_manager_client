@@ -1,14 +1,14 @@
-.SignIn {
+.SignUp {
   display: block;
   width: 100%;
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
   color: #495057;
-  background-color: #f5f5f5;
+  margin-top: 20px;
 }
 
-.SignIn Button {
+.SignUp Button {
   width: 100%;
   margin-top: 20px;
   height: 45px;

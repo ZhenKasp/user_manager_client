@@ -5,11 +5,11 @@ import UserManager from './containers/UserManager/UserManager';
 class App extends Component {
   render () {
     return (
-      <div>
+      <body>
         <Layout>
           <UserManager />
         </Layout>
-      </div>
+      </body>
     );
   }
 }

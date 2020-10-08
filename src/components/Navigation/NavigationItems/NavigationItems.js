@@ -2,11 +2,10 @@ import React from 'react';
 import classes from './NavigationItems.module.css';
 import NavigationItem from './NavigationItem/NavigationItem';
 
-const navigationItems = () => (
+const navigationItems = (props) => (
     <ul className={classes.NavigationItems}>
-        <NavigationItem link="/" >Block</NavigationItem>
-        <NavigationItem link="/" >Unblock</NavigationItem>
-        <NavigationItem link="/">Active</NavigationItem>
+        <NavigationItem link="/SignUp" active>SignUp</NavigationItem>
+        <NavigationItem link="/SignIn" >SignIn</NavigationItem>
     </ul>
 )
 
