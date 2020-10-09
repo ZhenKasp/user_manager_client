@@ -12,14 +12,17 @@ const signUp = (props) => {
     let object = {}
     data.forEach((value, key) => {object[key] = value});
 
-    try {
-      axios.post('http://localhost:8000/api/v1/signup', object)
-      .then(res => {
-        console.log(res);
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    axios.post('http://localhost:8000/api/v1/signup', object)
+    .then(res => {
+      if (res) {
+        console.log(res)
+        props.createFlashMessage(res.data.error);
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+      props.createFlashMessage(JSON.stringify(err));
+    });
   }
 
   return (
@@ -28,27 +31,27 @@ const signUp = (props) => {
       <Form onSubmit={(e) => handleSubmit(e)}>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control autoFocus type="email" name="email" placeholder="Enter email" />
+          <Form.Control autoFocus type="email" required name="email" placeholder="Enter email" />
           <Form.Text className="text-muted" />
         </Form.Group>
         <Form.Group controlId="formBasicUsername">
           <Form.Label>Username</Form.Label>
-          <Form.Control autoFocus name="username" placeholder="Username" />
+          <Form.Control autoFocus name="username" required placeholder="Username" />
           <Form.Text className="text-muted" />
         </Form.Group>
         <Form.Group controlId="formBasicFirstName">
           <Form.Label>First Name</Form.Label>
-          <Form.Control autoFocus name="firstname" placeholder="First Name" />
+          <Form.Control autoFocus name="firstname" required placeholder="First Name" />
           <Form.Text className="text-muted" />
         </Form.Group>
         <Form.Group controlId="formBasicLastName">
           <Form.Label>Last Name</Form.Label>
-          <Form.Control autoFocus name="lastname" placeholder="Last Name" />
+          <Form.Control autoFocus name="lastname" required placeholder="Last Name" />
           <Form.Text className="text-muted" />
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" name="password" placeholder="Password" />
+          <Form.Control type="password" required name="password" placeholder="Password" />
         </Form.Group>
         <Button variant="primary" type="submit">
           Registration
@@ -57,6 +60,5 @@ const signUp = (props) => {
     </div>
   )
 }
-
 
 export default signUp;
