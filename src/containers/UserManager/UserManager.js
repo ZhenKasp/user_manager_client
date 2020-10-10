@@ -4,12 +4,14 @@ import Aux from '../../hoc/Auxiliary';
 import SignIn from '../../components/SignIn/SignIn';
 import SignUp from '../../components/SignUp/SignUp';
 import FlashMessage from '../../components/FlashMessage/FlashMessage';
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+
 
 class UserManager extends Component {
   state = {
     users: "",
     flashMessage: "",
-    view: "SignIn",
+    view: "signin",
   }
 
   async componentDidMount() {
@@ -32,19 +34,30 @@ class UserManager extends Component {
     setTimeout(() => { this.setState({ flashMessage: "" }) }, 5000);
   }
 
+  viewHandler = (view) => {
+    this.setState({view: view});
+  }
+
+  chooseViewToRender = () => {
+    if (this.state.view === "signin") {
+      return <SignIn createFlashMessage={this.flashMessageHandler} />
+    } else if (this.state.view === "signup") {
+      return <SignUp createFlashMessage={this.flashMessageHandler} />
+    } else {
+      return "404"
+    }
+  }
+
   render () {
     return (
       <Aux>
+        <Toolbar changeView={this.viewHandler} active={this.state.view}/>
         {this.state.flashMessage &&
         <FlashMessage>
           {this.state.flashMessage}
         </FlashMessage>}
-
-        <SignIn createFlashMessage={this.flashMessageHandler}/>
-        <SignUp createFlashMessage={this.flashMessageHandler}/>
-        <br />
-        {this.state.users}
-
+        {this.state.view === "signin" ? <SignIn createFlashMessage={this.flashMessageHandler} />:
+        <SignUp createFlashMessage={this.flashMessageHandler} />}
       </Aux>
     )
   }

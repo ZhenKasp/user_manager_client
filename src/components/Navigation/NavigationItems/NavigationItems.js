@@ -4,8 +4,8 @@ import NavigationItem from './NavigationItem/NavigationItem';
 
 const navigationItems = (props) => (
     <ul className={classes.NavigationItems}>
-        <NavigationItem link="/SignUp" active>SignUp</NavigationItem>
-        <NavigationItem link="/SignIn" >SignIn</NavigationItem>
+        <NavigationItem view="signup" changeView={props.changeView} active={props.active} >SignUp</NavigationItem>
+        <NavigationItem view="signin" changeView={props.changeView} active={props.active} >SignIn</NavigationItem>
     </ul>
 )
 

@@ -6,7 +6,7 @@ const toolbar = (props) => (
     <header className={classes.Toolbar}>
         <div>UserManager</div>
         <nav>
-            <NavigationItems />
+            <NavigationItems changeView={props.changeView} active={props.active}/>
         </nav>
     </header>
 );
