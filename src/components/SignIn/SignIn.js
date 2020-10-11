@@ -5,10 +5,10 @@ import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.css';
 import submitAction from '../../utilities/submitAction';
  
-const signIn = (props) => (
+const SignIn = (props) => (
   <div className={classes.SignIn}>
-  <h1>Please Sign In</h1>
-    <Form onSubmit={(event) => submitAction(event, "signin", props.createFlashMessage)}>
+    <h1>Please Sign In</h1>
+    <Form onSubmit={(event) => submitAction(event, "signin", props.createFlashMessage, props.viewHandler)}>
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control autoFocus type="email" required name="email" placeholder="Enter email" />
@@ -25,4 +25,4 @@ const signIn = (props) => (
   </div>
 )
 
-export default signIn;
+export default SignIn;

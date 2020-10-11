@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.css';
 import submitAction from '../../utilities/submitAction';
 
-const signUp = (props) => (
+const SignUp = (props) => (
   <div className={classes.SignUp}>
     <h1>Please Sign Up</h1>
     <Form onSubmit={(event) => submitAction(event, "signup", props.createFlashMessage)}>
@@ -42,4 +42,4 @@ const signUp = (props) => (
 
   
 
-export default signUp;
+export default SignUp;
