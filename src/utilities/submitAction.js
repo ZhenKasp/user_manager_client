@@ -6,7 +6,7 @@ const submitAction = (event, path, createFlashMessage, viewHandler) => {
   let object = {}
   data.forEach((value, key) => {object[key] = value});
 
-  axios.post('http://localhost:8000/api/v1/' + path, object)
+  axios.post('http://localhost:8000/api/v1/' + path, object, { withCredentials: true })
   .then(res => {
     if (!res.data.username) {
       createFlashMessage(res.data.error);

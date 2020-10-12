@@ -8,7 +8,7 @@ import submitAction from '../../utilities/submitAction';
 const SignUp = (props) => (
   <div className={classes.SignUp}>
     <h1>Please Sign Up</h1>
-    <Form onSubmit={(event) => submitAction(event, "signup", props.createFlashMessage)}>
+    <Form onSubmit={(event) => submitAction(event, "signup", props.createFlashMessage, props.viewHandler)}>
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control autoFocus type="email" required name="email" placeholder="Enter email" />
@@ -39,7 +39,5 @@ const SignUp = (props) => (
     </Form>
   </div>
 )
-
-  
 
 export default SignUp;

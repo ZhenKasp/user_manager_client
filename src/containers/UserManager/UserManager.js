@@ -6,7 +6,6 @@ import FlashMessage from '../../components/FlashMessage/FlashMessage';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import UsersTable from '../../components/UsersTable/UsersTable';
 
-
 class UserManager extends Component {
   state = {
     users: "",
@@ -20,7 +19,7 @@ class UserManager extends Component {
   }
 
   viewHandler = (view) => {
-    return this.setState({view: view});
+    this.setState({view: view});
   }
 
   chooseViewToRender = () => {
@@ -29,13 +28,13 @@ class UserManager extends Component {
         <SignIn createFlashMessage={this.flashMessageHandler} viewHandler={this.viewHandler} />
       )
     } else if (this.state.view === "signup") {
-     return (
+      return (
        <SignUp createFlashMessage={this.flashMessageHandler} viewHandler={this.viewHandler} />
-     )
+      )
     } else if (this.state.view === "userstable") {
-     return (
+      return (
        <UsersTable />
-     )
+      )
     }    
   }
 
@@ -55,3 +54,21 @@ class UserManager extends Component {
 }
 
 export default UserManager;
+
+
+
+// {"message":"Network Error",
+// "name":"Error",
+// "stack":"Error: Network Error\n at createError (http://localhost:3000/static/js/1.chunk.js:840:15)\n at XMLHttpRequest.handleError (http://localhost:3000/static/js/1.chunk.js:337:14)",
+// "config":{"url":"http://localhost:8000/api/v1/signin",
+// "method":"post",
+// "headers":{"Accept":"application/json"},
+// "baseURL":"http://localhost:8000",
+// "transformRequest":[null],
+// "transformResponse":[null],
+// "timeout":10000,
+// "withCredentials":true,
+// "xsrfCookieName":"XSRF-TOKEN",
+// "xsrfHeaderName":"X-XSRF-TOKEN",
+// "maxContentLength":-1,
+// "maxBodyLength":-1}}
