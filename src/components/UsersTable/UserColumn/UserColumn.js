@@ -1,19 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Form from 'react-bootstrap/Form';
 
-const userColum = (props) => {
-  const user = props.user;
-  return (
-    <tr>
-      <td>{user.id}</td>
-      <td>{user.username}</td>
-      <td>{user.firstname + " " + user.lastname}</td>
-      <td>{user.email}</td>
-      <td>{user.username}</td>
-      <td>{user.username}</td>
-      <td>{user.status}</td>
-    </tr>
-  )
+class UserColum extends Component {
+  state = {
+    checked: this.props.allChecked
+  }
+  
+  componentWillReceiveProps(props) {
+    if (props.allChecked) this.setState({checked: true})
+    if (!props.anyChanged && !props.allChecked) this.setState({checked: false})
+  }
+
+  handleChanged = () => {
+    if (this.props.allChecked) this.props.resetAllChecked();
+    this.setState({checked: !this.state.checked})
+  }
+
+  render() {
+    const user = this.props.user;
+    const checked = this.state.checked;
+
+    return (
+      <tr>
+        <th>
+          <Form.Check 
+            type="checkbox"
+            id={user.id}
+            checked={checked}
+            onChange={this.handleChanged}
+
+          />
+        </th>
+        <td>{user.id}</td>
+        <td>{user.username}</td>
+        <td>{user.firstname + " " + user.lastname}</td>
+        <td>{user.email}</td>
+        <td>{new Date(user.createdAt).toLocaleString()}</td>
+        <td>{new Date(user.lastSignInAt).toLocaleString()}</td>
+        <td>{user.status}</td>
+      </tr>
+    )
+  }
 }
  
-
-export default userColum;
+export default UserColum;

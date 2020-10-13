@@ -3,9 +3,23 @@ import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import classes from './UsersTable.module.css';
 import UserColumn from './UserColumn/UserColumn';
+import Form from 'react-bootstrap/Form';
 
 const UsersTable = (props) => {
-   const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [allChecked, setAllChecked] = useState(false);
+  const [anyChanged, setAnyChanged] = useState(false);
+
+  const allCheckedHandler = () => {
+    setAllChecked(!allChecked);
+    setAnyChanged(true);
+  }
+
+  const checkedHandler = () => {
+    const checked = !allChecked
+    setAllChecked(checked);
+    if (!checked) setAnyChanged(false);
+  }
 
   useEffect(() => {
     try {
@@ -22,6 +36,7 @@ const UsersTable = (props) => {
     <Table striped bordered hover size="sm" className={classes.UsersTable}>
       <thead>
         <tr>
+          <th><Form.Check type="checkbox" checked={allChecked} onChange={checkedHandler} /></th>
           <th>#</th>
           <th>Username</th>
           <th>Full Name</th>
@@ -33,7 +48,13 @@ const UsersTable = (props) => {
       </thead>
       <tbody>
         {users.map(user => (
-          <UserColumn key={user.id} user={user} />
+          <UserColumn
+            key={user.id}
+            user={user}
+            allChecked={allChecked}
+            anyChanged={anyChanged}
+            resetAllChecked={allCheckedHandler}
+          />
         ))}
       </tbody>
     </Table>
