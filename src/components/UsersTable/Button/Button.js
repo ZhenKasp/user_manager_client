@@ -8,7 +8,6 @@ const button = (props) => {
 
   return (
     <Button className={classes.Button} variant={props.variant} >
-      {console.log(props)}
       <img src={img} alt={props.children}/>
     </Button>
   )

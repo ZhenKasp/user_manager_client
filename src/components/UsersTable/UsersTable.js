@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Button from './Button/Button';
 
 const UsersTable = (props) => {
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
   const [users, setUsers] = useState([]);
   const [allChecked, setAllChecked] = useState(false);
   const [anyChanged, setAnyChanged] = useState(false);
@@ -19,6 +20,11 @@ const UsersTable = (props) => {
 
   const checkedHandler = () => {
     const checked = !allChecked
+    if (checked) {
+      setSelectedCheckboxes(users.map(user => user.id));
+    } else if (!anyChanged) {
+      setSelectedCheckboxes([])
+    }
     setAllChecked(checked);
     if (!checked) setAnyChanged(false);
   }
@@ -33,6 +39,17 @@ const UsersTable = (props) => {
     )
   }
 
+  const setChecked = (id) => {
+      selectedCheckboxes.push(id);
+      setSelectedCheckboxes(selectedCheckboxes);
+  }
+
+  const unsetChecked = (id) => {
+    let index = selectedCheckboxes.indexOf(id);
+    selectedCheckboxes.splice(index, 1)
+    setSelectedCheckboxes(selectedCheckboxes);
+  }
+
   useEffect(() => {
     try {
       axios.get('http://localhost:8000/api/v1')
@@ -43,7 +60,7 @@ const UsersTable = (props) => {
       this.setState({flashMessage: err})
     }
   }, []);
-  
+
   return (
     <div className={classes.UsersTable}>
       <div className={classes.Tools}>
@@ -71,6 +88,8 @@ const UsersTable = (props) => {
                 allChecked={allChecked}
                 anyChanged={anyChanged}
                 resetAllChecked={allCheckedHandler}
+                setChecked={setChecked}
+                unsetChecked={unsetChecked}
               />
             ))}
           </tbody>

@@ -13,7 +13,14 @@ class UserRow extends Component {
 
   handleChanged = () => {
     if (this.props.allChecked) this.props.resetAllChecked();
-    this.setState({checked: !this.state.checked})
+    const newState = !this.state.checked;
+    const id = this.props.user.id;
+    if (newState === true) {
+      this.props.setChecked(id);
+    } else {
+      this.props.unsetChecked(id);
+    }
+    this.setState({checked: newState});
   }
 
   render() {
@@ -28,7 +35,6 @@ class UserRow extends Component {
             id={user.id}
             checked={checked}
             onChange={this.handleChanged}
-
           />
         </th>
         <td>{user.id}</td>
