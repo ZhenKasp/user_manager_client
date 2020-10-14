@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 
-class UserColum extends Component {
+class UserRow extends Component {
   state = {
     checked: this.props.allChecked
   }
@@ -43,4 +43,4 @@ class UserColum extends Component {
   }
 }
  
-export default UserColum;
+export default UserRow;

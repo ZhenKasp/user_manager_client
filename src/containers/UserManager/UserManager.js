@@ -54,21 +54,3 @@ class UserManager extends Component {
 }
 
 export default UserManager;
-
-
-
-// {"message":"Network Error",
-// "name":"Error",
-// "stack":"Error: Network Error\n at createError (http://localhost:3000/static/js/1.chunk.js:840:15)\n at XMLHttpRequest.handleError (http://localhost:3000/static/js/1.chunk.js:337:14)",
-// "config":{"url":"http://localhost:8000/api/v1/signin",
-// "method":"post",
-// "headers":{"Accept":"application/json"},
-// "baseURL":"http://localhost:8000",
-// "transformRequest":[null],
-// "transformResponse":[null],
-// "timeout":10000,
-// "withCredentials":true,
-// "xsrfCookieName":"XSRF-TOKEN",
-// "xsrfHeaderName":"X-XSRF-TOKEN",
-// "maxContentLength":-1,
-// "maxBodyLength":-1}}
