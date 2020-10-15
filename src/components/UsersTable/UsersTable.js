@@ -14,9 +14,12 @@ class UsersTable extends Component {
     anyChanged: false
   }
   
-
   allCheckedHandler = () => {
     this.setState({ allChecked: !this.state.allChecked, anyChanged: true })
+  }
+
+  cleanSelectedChecboxes = () => {
+    this.setState({selectedCheckboxes: []})
   }
 
   checkedHandler = () => {
@@ -43,7 +46,8 @@ class UsersTable extends Component {
           selectedCheckboxes={this.state.selectedCheckboxes}
           createFlashMessage={this.props.createFlashMessage} 
           viewHandler={this.props.viewHandler}
-          setUsers={this.handler} />
+          setUsers={this.handler} 
+          cleanSelectedChecboxes={this.cleanSelectedChecboxes} />      
       ))
     )
   }

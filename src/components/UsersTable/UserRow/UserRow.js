@@ -7,7 +7,7 @@ class UserRow extends Component {
   }
   
   componentWillReceiveProps(props) {
-    if (this.props.allChecked != props.allChecked) {
+    if (this.props.allChecked !== props.allChecked) {
       if (props.allChecked) this.setState({checked: true})
       if (!props.anyChanged && !props.allChecked) this.setState({checked: false});
     }

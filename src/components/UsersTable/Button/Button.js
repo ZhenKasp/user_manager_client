@@ -13,15 +13,15 @@ const button = (props) => {
       axios.delete('http://localhost:8000/api/v1/' + props.type, { params: { id: props.selectedCheckboxes.join(";") } }, { withCredentials: true })
       .then(res => {
         console.log(res)
-        if (!res.data) {
-          props.createFlashMessage("res.data.error");
+        if (res.data.error) {
+          props.createFlashMessage(res.data.error.message);
         } else {
-          props.setUsers(res.data.users)
-          // props.viewHandler('userstable');
+          props.cleanSelectedChecboxes();
+          props.setUsers(res.data.users);
         }
       })
-      .catch((err) => {
-        props.createFlashMessage(err.message);
+      .catch((error) => {
+        props.createFlashMessage(error.message);
       });
     } else if (props.selectedCheckboxes.length === 0) {
       props.createFlashMessage("First you should set checkboxes");
