@@ -26,8 +26,7 @@ class UsersTable extends Component {
     } else if (!this.state.anyChanged) {
       this.setState({ selectedCheckboxes: [] });
     }
-    this.setState({ allChecked: checked });
-    if (!checked) this.setState({ anyChanged: false });
+    this.setState({ allChecked: checked, anyChanged: false});
   }
 
   handler = (value) => {
