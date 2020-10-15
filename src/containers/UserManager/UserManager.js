@@ -33,7 +33,7 @@ class UserManager extends Component {
       )
     } else if (this.state.view === "userstable") {
       return (
-       <UsersTable />
+       <UsersTable createFlashMessage={this.flashMessageHandler} viewHandler={this.viewHandler}/>
       )
     }    
   }

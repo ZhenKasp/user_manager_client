@@ -15,7 +15,7 @@ const submitAction = (event, path, createFlashMessage, viewHandler) => {
     }
   })
   .catch((err) => {
-    createFlashMessage(JSON.stringify(err));
+    createFlashMessage(err.message);
   });
 }
 
