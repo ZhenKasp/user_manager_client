@@ -4,7 +4,7 @@ import NavigationItem from './NavigationItem/NavigationItem';
 
 const navigationItems = (props) => {
   const displayNavigationItems = () => {
-    if (props.active === "userstable") {
+    if (localStorage.getItem('user')) {
       return (
         <ul className={classes.NavigationItems}>
           <NavigationItem 

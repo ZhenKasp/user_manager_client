@@ -29,6 +29,7 @@ const button = (props) => {
       if (res.data.error) {
         props.createFlashMessage(res.data.error.message, "danger");
       } else {
+        console.log(res.data.users)
         props.createFlashMessage(res.data.message, "success");
         props.cleanSelectedChecboxes();
         props.setUsers(res.data.users);

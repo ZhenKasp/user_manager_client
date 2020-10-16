@@ -15,8 +15,6 @@ const userRow = (props) => {
     }
   }
 
-    
-
   return (
     <tr>
       <th>

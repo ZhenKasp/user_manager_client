@@ -5,6 +5,7 @@ import SignUp from '../../components/SignUp/SignUp';
 import FlashMessage from '../../components/FlashMessage/FlashMessage';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import UsersTable from '../UsersTable/UsersTable';
+import logout from '../../utilities/logout';
 
 class UserManager extends Component {
   state = {
@@ -12,6 +13,7 @@ class UserManager extends Component {
     flashMessage: "",
     variant: "danger",
     view: "signin",
+    email: ""
   }
 
   flashMessageHandler = (message, variant) => {
@@ -24,20 +26,43 @@ class UserManager extends Component {
   }
 
   chooseViewToRender = () => {
-    if (this.state.view === "signin") {
+    if (localStorage.getItem('user')) {
       return (
-        <SignIn createFlashMessage={this.flashMessageHandler} viewHandler={this.viewHandler} />
-      )
-    } else if (this.state.view === "signup") {
-      return (
-       <SignUp createFlashMessage={this.flashMessageHandler} viewHandler={this.viewHandler} />
-      )
-    } else if (this.state.view === "userstable") {
-      return (
-       <UsersTable createFlashMessage={this.flashMessageHandler} viewHandler={this.viewHandler}/>
-      )
-    }    
+        <UsersTable 
+          createFlashMessage={this.flashMessageHandler} 
+          viewHandler={this.viewHandler } 
+        />
+       )
+    } else {
+      if (this.state.view === "signup") {
+        return (
+          <SignUp 
+            createFlashMessage={this.flashMessageHandler} 
+            viewHandler={this.viewHandler} 
+            getUser={this.getUser}
+          />
+        )
+      } else {
+        return (
+          <SignIn 
+            createFlashMessage={this.flashMessageHandler} 
+            viewHandler={this.viewHandler} 
+            getUser={this.getUser}
+          />
+        )
+      }
+    }
   }
+
+  getUser = user => {
+    if (user.status === "active") {
+      localStorage.setItem('user', user);
+      console.log(JSON.stringify(user))
+    } else {
+      logout(this.viewHandler, this.flashMessageHandler);
+      console.log("user blocked or deleted");
+    }
+  };
 
   render () {
     const View = this.chooseViewToRender;

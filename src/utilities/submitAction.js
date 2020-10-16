@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const submitAction = (event, path, createFlashMessage, viewHandler) => {
+const submitAction = (event, path, createFlashMessage, viewHandler, getUser) => {
   event.preventDefault();
   const data = new FormData(event.target);
   let object = {};
@@ -8,9 +8,11 @@ const submitAction = (event, path, createFlashMessage, viewHandler) => {
 
   axios.post('http://localhost:8000/api/v1/' + path, object, { withCredentials: true })
   .then(res => {
-    if (!res.data.username) {
+    if (!res.data.user) {
       createFlashMessage(res.data.error, res.data.variant);
     } else {
+      console.log(res.data)
+      getUser(res.data.user);
       viewHandler('userstable');
       createFlashMessage(res.data.message, res.data.variant);
     }
