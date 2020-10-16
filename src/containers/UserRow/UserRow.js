@@ -3,12 +3,14 @@ import Form from 'react-bootstrap/Form';
 
 class UserRow extends Component {
   state = {
-    checked: this.props.allChecked
+    checked: false
   }
   
   componentWillReceiveProps(props) {
-    if (props.allChecked) this.setState({checked: true})
-    if (!props.anyChanged && !props.allChecked) this.setState({checked: false})
+    if (this.props.allChecked !== props.allChecked) {
+      if (props.allChecked) this.setState({checked: true})
+      if (!props.anyChanged && !props.allChecked) this.setState({checked: false});
+    }
   }
 
   handleChanged = () => {

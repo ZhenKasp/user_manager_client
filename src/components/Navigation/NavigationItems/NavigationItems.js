@@ -10,6 +10,7 @@ const navigationItems = (props) => {
           <NavigationItem 
             view="signin" 
             changeView={props.changeView}
+            createFlashMessage={props.createFlashMessage}
             active={props.active} >LogOut
           </NavigationItem>
         </ul>
