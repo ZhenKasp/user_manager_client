@@ -4,7 +4,7 @@ import classes from './Button.module.css';
 import axios from 'axios';
 
 const button = (props) => {
-  const images = require.context('../../../assets/img', true);
+  const images = require.context('../../assets/img/', true);
   let img = images('./' + props.type + ".png");
 
   const confirmButtonClick = () => {

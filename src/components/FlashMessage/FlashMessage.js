@@ -4,7 +4,7 @@ import Alert from 'react-bootstrap/Alert';
 
 const flashMessage = (props) => {
   return (
-    <Alert className={classes.FlashMessage} variant={props.variant? props.varian: "danger"} >
+    <Alert className={classes.FlashMessage} variant={props.variant ? props.variant : "danger"} >
       {props.children}  
     </Alert>
   )

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import classes from './UsersTable.module.css';
-import UserTable from './UserRow/UserRow';
+import UserTable from '../UserRow/UserRow';
 import Form from 'react-bootstrap/Form';
-import Button from './Button/Button';
+import Button from '../../components/Button/Button';
 
 class UsersTable extends Component {
   state = {

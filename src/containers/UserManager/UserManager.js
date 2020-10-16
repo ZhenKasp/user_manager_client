@@ -4,7 +4,7 @@ import SignIn from '../../components/SignIn/SignIn';
 import SignUp from '../../components/SignUp/SignUp';
 import FlashMessage from '../../components/FlashMessage/FlashMessage';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
-import UsersTable from '../../components/UsersTable/UsersTable';
+import UsersTable from '../UsersTable/UsersTable';
 
 class UserManager extends Component {
   state = {
