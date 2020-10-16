@@ -6,7 +6,10 @@ const toolbar = (props) => (
     <header className={classes.Toolbar}>
         <div>UserManager</div>
         <nav>
-            <NavigationItems changeView={props.changeView} active={props.active}/>
+          <NavigationItems 
+            changeView={props.changeView} 
+            active={props.active}
+            createFlashMessage={props.createFlashMessage} />
         </nav>
     </header>
 );

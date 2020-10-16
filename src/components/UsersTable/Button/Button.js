@@ -9,22 +9,22 @@ const button = (props) => {
 
   const confirmButtonClick = () => {
     if (props.type === 'delete' && props.selectedCheckboxes.length !== 0) {
-      console.log(props.selectedCheckboxes);
       axios.delete('http://localhost:8000/api/v1/' + props.type, { params: { id: props.selectedCheckboxes.join(";") } }, { withCredentials: true })
       .then(res => {
         console.log(res)
         if (res.data.error) {
-          props.createFlashMessage(res.data.error.message);
+          props.createFlashMessage(res.data.error.message, "danger");
         } else {
+          props.createFlashMessage(res.data.message, "success");
           props.cleanSelectedChecboxes();
           props.setUsers(res.data.users);
         }
       })
       .catch((error) => {
-        props.createFlashMessage(error.message);
+        props.createFlashMessage(error.message, "danger");
       });
     } else if (props.selectedCheckboxes.length === 0) {
-      props.createFlashMessage("First you should set checkboxes");
+      props.createFlashMessage("First you should set checkboxes", "warning");
     }
   }
 

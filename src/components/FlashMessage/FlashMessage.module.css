@@ -4,18 +4,14 @@
   position: fixed;
   top: 0;
   left: 0;
-  color: #a36464;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  box-sizing: border-box;
-  z-index: 50;
-  background-color: #f2dfde;
-  border: 2px solid #ead8da;
   visibility: hidden;
-  animation: flash 5s linear;
-}
+  border-radius: 0;
+  z-index: 0;
+  animation: flash 4.5s linear;  
+} 
 
 @keyframes flash {
   0% {

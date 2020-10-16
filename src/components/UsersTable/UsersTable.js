@@ -72,7 +72,7 @@ class UsersTable extends Component {
         this.setState({ users: res.data.users });
       });
     } catch (err) {
-      this.props.createFlashMessage(err.message);
+      this.props.createFlashMessage(err.message, "danger");
     }
   }
  

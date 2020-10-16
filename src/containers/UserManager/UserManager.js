@@ -10,12 +10,13 @@ class UserManager extends Component {
   state = {
     users: "",
     flashMessage: "",
+    variant: "danger",
     view: "signin",
   }
 
-  flashMessageHandler = (message) => {
-    this.setState({flashMessage: message});
-    setTimeout(() => { this.setState({ flashMessage: "" }) }, 5000);
+  flashMessageHandler = (message, variant) => {
+    this.setState({flashMessage: message, variant: variant});
+    setTimeout(() => { this.setState({ flashMessage: "", variant: "danger"}) }, 5000);
   }
 
   viewHandler = (view) => {
@@ -42,9 +43,12 @@ class UserManager extends Component {
     const View = this.chooseViewToRender;
     return (
       <Aux>
-        <Toolbar changeView={this.viewHandler} active={this.state.view}/>
+        <Toolbar
+          createFlashMessage={this.flashMessageHandler} 
+          changeView={this.viewHandler}
+          active={this.state.view}/>
         {this.state.flashMessage &&
-        <FlashMessage>
+        <FlashMessage variant={this.state.variant}>
           {this.state.flashMessage}
         </FlashMessage>}
         <View />
