@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import classes from './UsersTable.module.css';
-import UserTable from '../UserRow/UserRow';
+import UserTable from '../../components/UserRow/UserRow';
 import Form from 'react-bootstrap/Form';
 import Button from '../../components/Button/Button';
 
@@ -19,7 +19,7 @@ class UsersTable extends Component {
   }
 
   cleanSelectedChecboxes = () => {
-    this.setState({selectedCheckboxes: []})
+    this.setState({selectedCheckboxes: [], allChecked: false, anyChanged: false})
   }
 
   checkedHandler = () => {
@@ -55,7 +55,7 @@ class UsersTable extends Component {
   setChecked = (id) => {
     let checkboxes = this.state.selectedCheckboxes
     checkboxes.push(id);
-    this.setState({ selectedCheckboxes: checkboxes });
+    this.setState({ selectedCheckboxes: checkboxes, anyChanged: true });
   }
 
   unsetChecked = (id) => {
@@ -78,7 +78,7 @@ class UsersTable extends Component {
  
   render() {
     const buttons = {block: "warning", unblock: "success", delete: "danger"};
-    const { users, allChecked, anyChanged } = this.state;
+    const { users, allChecked, anyChanged, selectedCheckboxes } = this.state;
 
     return (
       <div className={classes.UsersTable}>
@@ -109,6 +109,8 @@ class UsersTable extends Component {
                   resetAllChecked={this.allCheckedHandler}
                   setChecked={this.setChecked}
                   unsetChecked={this.unsetChecked}
+                  selectedCheckboxes={selectedCheckboxes}
+                  checked={selectedCheckboxes.includes(user.id)}
                 />
               ))}
             </tbody>

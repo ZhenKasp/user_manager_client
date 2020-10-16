@@ -7,23 +7,46 @@ const button = (props) => {
   const images = require.context('../../assets/img/', true);
   let img = images('./' + props.type + ".png");
 
+  const deleteUsers = (type, selectedCheckboxes) => {
+    axios.delete('http://localhost:8000/api/v1/' + type, { params: { id: selectedCheckboxes.join(";") } }, { withCredentials: true })
+    .then(res => {
+      if (res.data.error) {
+        props.createFlashMessage(res.data.error.message, "danger");
+      } else {
+        props.createFlashMessage(res.data.message, "success");
+        props.cleanSelectedChecboxes();
+        props.setUsers(res.data.users);
+      }
+    })
+    .catch((error) => {
+      props.createFlashMessage(error.message, "danger");
+    });
+  }
+
+  const changeUserStatus = (type, selectedCheckboxes) => {
+    axios.patch('http://localhost:8000/api/v1/' + type, { params: { id: selectedCheckboxes.join(";") } }, { withCredentials: true })
+    .then(res => {
+      if (res.data.error) {
+        props.createFlashMessage(res.data.error.message, "danger");
+      } else {
+        props.createFlashMessage(res.data.message, "success");
+        props.cleanSelectedChecboxes();
+        props.setUsers(res.data.users);
+      }
+    })
+    .catch((error) => {
+      props.createFlashMessage(error.message, "danger");
+    });
+  }
+
   const confirmButtonClick = () => {
-    if (props.type === 'delete' && props.selectedCheckboxes.length !== 0) {
-      axios.delete('http://localhost:8000/api/v1/' + props.type, { params: { id: props.selectedCheckboxes.join(";") } }, { withCredentials: true })
-      .then(res => {
-        console.log(res)
-        if (res.data.error) {
-          props.createFlashMessage(res.data.error.message, "danger");
-        } else {
-          props.createFlashMessage(res.data.message, "success");
-          props.cleanSelectedChecboxes();
-          props.setUsers(res.data.users);
-        }
-      })
-      .catch((error) => {
-        props.createFlashMessage(error.message, "danger");
-      });
-    } else if (props.selectedCheckboxes.length === 0) {
+    if (props.selectedCheckboxes.length !== 0) {
+      if (props.type === 'delete') {
+        deleteUsers(props.type, props.selectedCheckboxes);
+      } else { 
+        changeUserStatus(props.type, props.selectedCheckboxes);
+      }
+    } else {
       props.createFlashMessage("First you should set checkboxes", "warning");
     }
   }
