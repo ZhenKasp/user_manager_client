@@ -9,7 +9,9 @@ const toolbar = (props) => (
           <NavigationItems 
             changeView={props.changeView} 
             active={props.active}
-            createFlashMessage={props.createFlashMessage} />
+            createFlashMessage={props.createFlashMessage} 
+            setToken={props.setToken}
+          />
         </nav>
     </header>
 );

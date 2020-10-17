@@ -36,22 +36,7 @@ class UsersTable extends Component {
     this.setState({ users: value });
   }
 
-  controlButtons = (buttons) => {
-    return (
-      Object.keys(buttons).map(key => (
-        <Button
-          key={key}
-          type={key}
-          variant={buttons[key]}
-          selectedCheckboxes={this.state.selectedCheckboxes}
-          createFlashMessage={this.props.createFlashMessage} 
-          viewHandler={this.props.viewHandler}
-          setUsers={this.handler} 
-          cleanSelectedChecboxes={this.cleanSelectedChecboxes} />      
-      ))
-    )
-  }
-
+  
   setChecked = (id) => {
     let checkboxes = this.state.selectedCheckboxes
     checkboxes.push(id);
@@ -69,12 +54,35 @@ class UsersTable extends Component {
     try {
       axios.get('http://localhost:8000/api/v1', { headers: { authorization: localStorage.getItem('token') }})
       .then(res => {
-        console.log(res)
-        this.setState({ users: res.data.users });
+        if (res.data.error) {
+          this.props.createFlashMessage(res.data.error, res.data.variant);
+          this.props.setToken({token: res.data.token});
+          this.props.viewHandler("signin");
+        } else {
+          this.setState({ users: res.data.users });
+        }
       });
     } catch (err) {
       this.props.createFlashMessage(err.message, "danger");
     }
+  }
+
+  controlButtons = (buttons) => {
+    return (
+      Object.keys(buttons).map(key => (
+        <Button
+          key={key}
+          type={key}
+          variant={buttons[key]}
+          selectedCheckboxes={this.state.selectedCheckboxes}
+          createFlashMessage={this.props.createFlashMessage} 
+          viewHandler={this.props.viewHandler}
+          setUsers={this.handler} 
+          cleanSelectedChecboxes={this.cleanSelectedChecboxes} 
+          setToken={this.props.setToken} 
+        />     
+      ))
+    )
   }
  
   render() {

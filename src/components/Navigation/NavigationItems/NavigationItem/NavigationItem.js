@@ -7,7 +7,7 @@ const navigationItem = (props) => {
     <li className={classes.NavigationItem}>
       <p className={props.active === props.children.toLowerCase() ? classes.active : null}
         onClick={() => {localStorage.getItem("token") ? 
-          logout(props.changeView, props.createFlashMessage) :
+          logout(props.changeView, props.setToken, props.createFlashMessage) :
           props.changeView(props.view)}}>
         {props.children}
       </p>

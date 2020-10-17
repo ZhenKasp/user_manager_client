@@ -12,7 +12,8 @@ const button = (props) => {
     axios.delete('http://localhost:8000/api/v1/' + type, { headers: { authorization: localStorage.getItem('token') }, params } )
     .then(res => {
       if (res.data.error) {
-        props.createFlashMessage(res.data.error.message, "danger");
+        props.createFlashMessage(res.data.error, "danger");
+        props.setToken(res.data.token);
       } else {
         props.createFlashMessage(res.data.message, "success");
         props.cleanSelectedChecboxes();
@@ -28,9 +29,9 @@ const button = (props) => {
     axios.patch('http://localhost:8000/api/v1/' + type, params, { headers: { authorization: localStorage.getItem('token') }})
     .then(res => {
       if (res.data.error) {
-        props.createFlashMessage(res.data.error.message, "danger");
+        props.createFlashMessage(res.data.error, "danger");
+        props.setToken(res.data.token);
       } else {
-        console.log(res.data.users)
         props.createFlashMessage(res.data.message, "success");
         props.cleanSelectedChecboxes();
         props.setUsers(res.data.users);

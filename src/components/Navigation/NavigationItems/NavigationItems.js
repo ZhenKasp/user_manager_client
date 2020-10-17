@@ -11,7 +11,8 @@ const navigationItems = (props) => {
             view="signin" 
             changeView={props.changeView}
             createFlashMessage={props.createFlashMessage}
-            active={props.active} >LogOut
+            active={props.active} 
+            setToken={props.setToken} >LogOut
           </NavigationItem>
         </ul>
       )
