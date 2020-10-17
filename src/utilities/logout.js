@@ -1,15 +1,10 @@
 import axios from 'axios';
 
 const logout = (changeView, createFlashMessage) => {
-  axios.delete("http://localhost:8000/api/v1/logout", {}, { withCredentials: true })
+  axios.delete("http://localhost:8000/api/v1/logout", { headers: { authorization: localStorage.getItem('token') }}, {})
   .then(res => {
-      if (res) {
-        if (!localStorage.getItem('user')) {
-          createFlashMessage("User was blocked or deleted", "danger")
-        } else {
-          createFlashMessage(res.data.message, res.data.variant);
-        }
-        localStorage.removeItem('user');
+      if (res.data.success) {
+        localStorage.removeItem('token');
         changeView("signin");
       } else {
         res.json({ success: false, error: "logout error"});

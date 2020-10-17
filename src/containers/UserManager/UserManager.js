@@ -5,7 +5,6 @@ import SignUp from '../../components/SignUp/SignUp';
 import FlashMessage from '../../components/FlashMessage/FlashMessage';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import UsersTable from '../UsersTable/UsersTable';
-import logout from '../../utilities/logout';
 
 class UserManager extends Component {
   state = {
@@ -13,7 +12,6 @@ class UserManager extends Component {
     flashMessage: "",
     variant: "danger",
     view: "signin",
-    email: ""
   }
 
   flashMessageHandler = (message, variant) => {
@@ -26,7 +24,7 @@ class UserManager extends Component {
   }
 
   chooseViewToRender = () => {
-    if (localStorage.getItem('user')) {
+    if (localStorage.getItem('token')) {
       return (
         <UsersTable 
           createFlashMessage={this.flashMessageHandler} 
@@ -39,7 +37,7 @@ class UserManager extends Component {
           <SignUp 
             createFlashMessage={this.flashMessageHandler} 
             viewHandler={this.viewHandler} 
-            getUser={this.getUser}
+            setToken={this.setToken}
           />
         )
       } else {
@@ -47,21 +45,22 @@ class UserManager extends Component {
           <SignIn 
             createFlashMessage={this.flashMessageHandler} 
             viewHandler={this.viewHandler} 
-            getUser={this.getUser}
+            setToken={this.setToken}
           />
         )
       }
     }
   }
 
-  getUser = user => {
-    if (user.status === "active") {
-      localStorage.setItem('user', user);
-      console.log(JSON.stringify(user))
-    } else {
-      logout(this.viewHandler, this.flashMessageHandler);
-      console.log("user blocked or deleted");
-    }
+  setToken = token => {
+    if (token) {
+      localStorage.setItem('token', token);
+      console.log(JSON.stringify(token))
+    } 
+    // else {
+    //   logout(this.viewHandler, this.flashMessageHandler);
+    //   console.log("user blocked or deleted");
+    // }
   };
 
   render () {

@@ -6,9 +6,10 @@ import axios from 'axios';
 const button = (props) => {
   const images = require.context('../../assets/img/', true);
   let img = images('./' + props.type + ".png");
+  const params = { id: props.selectedCheckboxes.join(";")};
 
-  const deleteUsers = (type, selectedCheckboxes) => {
-    axios.delete('http://localhost:8000/api/v1/' + type, { params: { id: selectedCheckboxes.join(";") } }, { withCredentials: true })
+  const deleteUsers = (type) => {
+    axios.delete('http://localhost:8000/api/v1/' + type, { headers: { authorization: localStorage.getItem('token') }, params } )
     .then(res => {
       if (res.data.error) {
         props.createFlashMessage(res.data.error.message, "danger");
@@ -21,10 +22,10 @@ const button = (props) => {
     .catch((error) => {
       props.createFlashMessage(error.message, "danger");
     });
-  }
+  };
 
-  const changeUserStatus = (type, selectedCheckboxes) => {
-    axios.patch('http://localhost:8000/api/v1/' + type, { params: { id: selectedCheckboxes.join(";") } }, { withCredentials: true })
+  const changeUserStatus = (type) => {
+    axios.patch('http://localhost:8000/api/v1/' + type, params, { headers: { authorization: localStorage.getItem('token') }})
     .then(res => {
       if (res.data.error) {
         props.createFlashMessage(res.data.error.message, "danger");
@@ -38,19 +39,19 @@ const button = (props) => {
     .catch((error) => {
       props.createFlashMessage(error.message, "danger");
     });
-  }
+  };
 
   const confirmButtonClick = () => {
     if (props.selectedCheckboxes.length !== 0) {
       if (props.type === 'delete') {
-        deleteUsers(props.type, props.selectedCheckboxes);
+        deleteUsers(props.type);
       } else { 
-        changeUserStatus(props.type, props.selectedCheckboxes);
+        changeUserStatus(props.type);
       }
     } else {
       props.createFlashMessage("First you should set checkboxes", "warning");
     }
-  }
+  };
 
   return (
     <Button
