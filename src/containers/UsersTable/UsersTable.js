@@ -52,7 +52,7 @@ class UsersTable extends Component {
 
   componentDidMount(){
     try {
-      axios.get('http://localhost:8000/api/v1', { headers: { authorization: localStorage.getItem('token') }})
+      axios.get(process.env.REACT_APP_PATH_TO_SERVER, { headers: { authorization: localStorage.getItem('token') }})
       .then(res => {
         if (res.data.error) {
           this.props.createFlashMessage(res.data.error, res.data.variant);

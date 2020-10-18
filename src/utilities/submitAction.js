@@ -6,7 +6,7 @@ const submitAction = (event, path, createFlashMessage, setToken) => {
   let object = {};
   data.forEach((value, key) => {object[key] = value});
 
-  axios.post('http://localhost:8000/api/v1/' + path, object, { withCredentials: true })
+  axios.post(process.env.REACT_APP_PATH_TO_SERVER + path, object)
   .then(res => {
     if (!res.data.token) {
       createFlashMessage(res.data.error, res.data.variant);

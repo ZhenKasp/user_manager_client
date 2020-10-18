@@ -62,7 +62,6 @@ class UserManager extends Component {
       localStorage.removeItem('token');
       this.setState({token: token});
     }
-    console.log(token);
   };
 
 

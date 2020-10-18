@@ -9,7 +9,7 @@ const button = (props) => {
   const params = { id: props.selectedCheckboxes.join(";")};
 
   const deleteUsers = (type) => {
-    axios.delete('http://localhost:8000/api/v1/' + type, { headers: { authorization: localStorage.getItem('token') }, params } )
+    axios.delete(process.env.REACT_APP_PATH_TO_SERVER + type, { headers: { authorization: localStorage.getItem('token') }, params } )
     .then(res => {
       if (res.data.error) {
         props.createFlashMessage(res.data.error, "danger");
@@ -26,7 +26,7 @@ const button = (props) => {
   };
 
   const changeUserStatus = (type) => {
-    axios.patch('http://localhost:8000/api/v1/' + type, params, { headers: { authorization: localStorage.getItem('token') }})
+    axios.patch(process.env.REACT_APP_PATH_TO_SERVER + type, params, { headers: { authorization: localStorage.getItem('token') }})
     .then(res => {
       if (res.data.error) {
         props.createFlashMessage(res.data.error, "danger");
